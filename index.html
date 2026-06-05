@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio – Nguyễn Đức Ngọc Anh</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-light: #555;
+    --ink-faint: #999;
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --rule: #e8e6e0;
+    --accent: #2d6a4f;
+    --accent-warm: #b5862a;
+    --tag-bg: #f0ede6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink-light);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 5vw 80px;
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--ink-light);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-bottom: 3rem;
+  }
+  .pill {
+    background: var(--tag-bg);
+    color: var(--ink-light);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    border: 1px solid var(--rule);
+  }
+  .hero-scroll {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: var(--ink-faint); font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    padding: 80px 5vw;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-num {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── GOALS GRID ── */
+  .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .goal-card {
+    background: var(--surface);
+    padding: 1.8rem;
+    transition: background 0.2s;
+  }
+  .goal-card:hover { background: #f5f3ed; }
+  .goal-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.9rem;
+    display: block;
+  }
+  .goal-card p {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+
+  /* ── ASSIGNMENTS ── */
+  .assignments { display: flex; flex-direction: column; gap: 0; }
+
+  .assignment {
+    border: 1px solid var(--rule);
+    border-top: none;
+    background: var(--surface);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .assignment:first-child { border-top: 1px solid var(--rule); }
+  .assignment:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.06); z-index: 1; position: relative; }
+
+  .assignment-header {
+    display: flex;
+    align-items: stretch;
+    cursor: pointer;
+    user-select: none;
+  }
+  .assignment-num {
+    width: 56px;
+    flex-shrink: 0;
+    background: var(--tag-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--ink-faint);
+    border-right: 1px solid var(--rule);
+  }
+  .assignment-meta {
+    flex: 1;
+    padding: 1.25rem 1.5rem;
+  }
+  .assignment-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+  .assignment-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+  }
+  .assignment-sub {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+  }
+  .assignment-toggle {
+    width: 56px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-faint);
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+  }
+  .assignment.open .assignment-toggle { transform: rotate(45deg); }
+
+  .assignment-body {
+    display: none;
+    padding: 0 1.5rem 1.5rem 4rem;
+    border-top: 1px solid var(--rule);
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+  .assignment.open .assignment-body { display: block; }
+
+  .body-section { margin-top: 1.5rem; }
+  .body-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.7rem;
+    font-weight: 500;
+  }
+  .steps-list {
+    list-style: none;
+    counter-reset: step;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .steps-list li {
+    counter-increment: step;
+    display: flex; gap: 0.75rem;
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+  .steps-list li::before {
+    content: counter(step, decimal-leading-zero);
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    font-weight: 500;
+    padding-top: 0.15rem;
+    min-width: 22px;
+  }
+  .eval-box {
+    background: var(--tag-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.2rem;
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 0.25rem 0.7rem;
+    border-radius: 4px;
+    background: var(--tag-bg);
+    color: var(--ink-faint);
+    border: 1px solid var(--rule);
+    letter-spacing: 0.04em;
+  }
+  .doc-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-top: 1rem;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .doc-link:hover { border-color: var(--accent); }
+
+  /* ── COMPARE TABLE ── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 1rem;
+  }
+  .compare-cell {
+    background: var(--surface);
+    padding: 1.2rem 1.4rem;
+  }
+  .compare-head {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+  .compare-cell ul {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.35rem;
+  }
+  .compare-cell ul li {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .compare-cell ul li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  /* ── SUMMARY ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 3rem;
+  }
+  .stat-cell {
+    background: var(--surface);
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .skills-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+  .skill-badge {
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    background: var(--surface);
+    transition: all 0.2s;
+  }
+  .skill-badge:hover {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .principle-card {
+    background: var(--surface);
+    padding: 1.5rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .principle-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--rule);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .principle-title {
+    font-weight: 500;
+    font-size: 0.88rem;
+    margin-bottom: 0.3rem;
+    color: var(--ink);
+  }
+  .principle-desc { font-size: 0.82rem; color: var(--ink-faint); line-height: 1.6; }
+
+  /* ── QUOTE ── */
+  .quote-section {
+    padding: 80px 5vw;
+    background: var(--ink);
+    color: white;
+  }
+  .quote-inner { max-width: 700px; margin: 0 auto; }
+  blockquote {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.4;
+    font-style: italic;
+    margin-bottom: 1.2rem;
+  }
+  .quote-attr {
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem 5vw;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+  }
+
+  /* ── SEPARATOR ── */
+  hr.section-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .assignment-body { padding-left: 1.5rem; }
+  }
+
+  /* ── FADE-IN ON LOAD ── */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">NgocAnh.dev</a>
+  <div class="nav-links">
+    <a href="#goals">Mục tiêu</a>
+    <a href="#assignments">Bài tập</a>
+    <a href="#summary">Tổng kết</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero fade-in">
+  <div class="hero-eyebrow">Portfolio · MSSV 25020456</div>
+  <h1>Nguyễn Đức<br><em>Ngọc Anh</em></h1>
+  <p class="hero-sub">Sinh viên năm nhất — Nhập môn Công nghệ Số & Ứng dụng Trí tuệ Nhân tạo · 2025–2026</p>
+  <div class="hero-meta">
+    <span class="pill">🖥️ Công nghệ số</span>
+    <span class="pill">🤖 Ứng dụng AI</span>
+    <span class="pill">📚 Năm nhất 2025–2026</span>
+  </div>
+  <div class="hero-scroll">↓ Cuộn để xem</div>
+</div>
+
+<!-- GOALS -->
+<hr class="section-rule">
+<section class="section fade-in" id="goals">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Mục tiêu học tập</h2>
+  </div>
+  <div class="goals-grid">
+    <div class="goal-card">
+      <span class="goal-icon">🗂️</span>
+      <p>Rèn luyện kỹ năng tổ chức tệp tin và thư mục trên Windows — tạo, đổi tên, sao chép, di chuyển và xóa thành thạo.</p>
+    </div>
+    <div class="goal-card">
+      <span class="goal-icon">🔍</span>
+      <p>Phát triển năng lực tìm kiếm học thuật từ Google Scholar, ACM, IEEE Xplore bằng toán tử tìm kiếm nâng cao.</p>
+    </div>
+    <div class="goal-card">
+      <span class="goal-icon">✍️</span>
+      <p>Thành thạo kỹ năng viết Prompt hiệu quả — role prompting, chain-of-thought, few-shot — tối ưu hóa đầu ra AI.</p>
+    </div>
+    <div class="goal-card">
+      <span class="goal-icon">🤝</span>
+      <p>Trải nghiệm làm việc nhóm trực tuyến: phân công rõ ràng, dùng Canva, Google Docs, Drive, Zalo và Meet.</p>
+    </div>
+    <div class="goal-card">
+      <span class="goal-icon">🤖</span>
+      <p>Ứng dụng AI tạo sinh vào sáng tạo nội dung số, đồng thời hiểu rõ giới hạn và trách nhiệm khi dùng AI.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ASSIGNMENTS -->
+<hr class="section-rule">
+<section class="section fade-in" id="assignments">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Các bài tập thành phần</h2>
+  </div>
+  <div class="assignments">
+
+    <!-- BÀI 1 -->
+    <div class="assignment" onclick="toggle(this)">
+      <div class="assignment-header">
+        <div class="assignment-num">1</div>
+        <div class="assignment-meta">
+          <div class="assignment-label">Mục 1.4 · Máy tính và thiết bị ngoại vi</div>
+          <div class="assignment-title">Thao tác cơ bản với tệp tin và thư mục</div>
+          <div class="assignment-sub">Windows 11 · 12 bước thực hiện · ✓ Hoàn thành</div>
+        </div>
+        <div class="assignment-toggle">+</div>
+      </div>
+      <div class="assignment-body">
+        <div class="body-section">
+          <div class="body-label">12 bước thực hiện</div>
+          <ul class="steps-list">
+            <li>Mở File Explorer bằng tổ hợp <strong>Windows + E</strong></li>
+            <li>Truy cập ổ đĩa làm việc (ổ D: hoặc E:, không dùng ổ hệ thống)</li>
+            <li>Tạo thư mục mới: chuột phải → New → Folder → đặt tên <em>ThucHanh_NguyenCongGiaMinh</em></li>
+            <li>Vào thư mục vừa tạo bằng cách nhấp đúp</li>
+            <li>Tạo tệp văn bản mới → đặt tên <em>GhiChu.txt</em></li>
+            <li>Đổi tên tệp: chuột phải → Rename → <em>GhiChuQuanTrong.txt</em></li>
+            <li>Tạo thư mục con <em>TaiLieu</em> bên trong thư mục gốc</li>
+            <li><strong>Copy:</strong> chuột phải → Copy → vào TaiLieu → Paste</li>
+            <li><strong>Cut:</strong> tạo DiChuyen.txt → Cut → vào TaiLieu → Paste</li>
+            <li>Xóa tệp thường (vào Recycle Bin): chuột phải → Delete</li>
+            <li><strong>Xóa vĩnh viễn:</strong> Shift + Delete → Yes</li>
+            <li>Khôi phục từ Recycle Bin: mở → tìm tệp → Restore</li>
+          </ul>
+        </div>
+        <div class="body-section">
+          <div class="body-label">Tự đánh giá</div>
+          <div class="eval-box">Đã thực hiện đầy đủ 12 thao tác. Nhận thức rõ: Copy giữ bản gốc, Cut di chuyển hoàn toàn; Delete đưa vào Recycle Bin có thể khôi phục, Shift+Delete xóa vĩnh viễn.</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Windows 11</span><span class="tag">File Explorer</span><span class="tag">Copy / Cut</span><span class="tag">Recycle Bin</span>
+        </div>
+        <a class="doc-link" href="https://docs.google.com/document/d/1L6A1Z3MoicUXxSqGetdme2wZNLNYymTi/edit?usp=drive_link" target="_blank">↗ Báo cáo bài tập 1</a>
+      </div>
+    </div>
+
+    <!-- BÀI 2 -->
+    <div class="assignment" onclick="toggle(this)">
+      <div class="assignment-header">
+        <div class="assignment-num">2</div>
+        <div class="assignment-meta">
+          <div class="assignment-label">Mục 2.4 · Khai thác dữ liệu và thông tin</div>
+          <div class="assignment-title">Tìm kiếm và đánh giá thông tin học thuật</div>
+          <div class="assignment-sub">Google Scholar · ACM · IEEE · 12 tài liệu · ✓ Hoàn thành</div>
+        </div>
+        <div class="assignment-toggle">+</div>
+      </div>
+      <div class="assignment-body">
+        <div class="body-section">
+          <div class="body-label">Chủ đề nghiên cứu</div>
+          <div class="eval-box"><strong>Lập trình Hệ thống (Systems Programming)</strong> — nền tảng cốt lõi của mọi phần mềm hiện đại: quản lý tiến trình, bộ nhớ, hệ thống tệp, lập trình nhân Linux, hệ thống phân tán và thời gian thực.</div>
+        </div>
+        <div class="body-section">
+          <div class="body-label">5 tiêu chí đánh giá độ tin cậy</div>
+          <ul class="steps-list">
+            <li>Tác giả & cơ quan: uy tín, chuyên môn, ranking tạp chí (IF, h-index)</li>
+            <li>Phương pháp nghiên cứu: chặt chẽ, có bình duyệt độc lập, tái lập được</li>
+            <li>Số lượng trích dẫn: chỉ số Google Scholar phản ánh tầm ảnh hưởng</li>
+            <li>Tính cập nhật: năm xuất bản, tần suất cập nhật trong lĩnh vực thay đổi nhanh</li>
+            <li>Tính phù hợp: mức độ liên quan trực tiếp đến chủ đề lập trình hệ thống</li>
+          </ul>
+        </div>
+        <div class="body-section">
+          <div class="body-label">Kết quả — Top 3 nguồn</div>
+          <ul class="steps-list">
+            <li>Silberschatz et al. – OS Concepts (Wiley, 2018) · ⭐⭐⭐⭐⭐ · 25,000+ trích dẫn</li>
+            <li>Dean & Ghemawat – MapReduce (OSDI, 2004) · ⭐⭐⭐⭐⭐ · 21,000+ trích dẫn</li>
+            <li>Tanenbaum & Bos – Modern OS (Pearson, 2014) · ⭐⭐⭐⭐⭐ · 18,000+ trích dẫn</li>
+          </ul>
+        </div>
+        <div class="tags">
+          <span class="tag">Google Scholar</span><span class="tag">ACM Digital Library</span><span class="tag">IEEE Xplore</span><span class="tag">Systems Programming</span>
+        </div>
+        <a class="doc-link" href="https://docs.google.com/document/d/1y9JYgJgwBavz-fBQISM9rOavCWqNJz-u/edit?usp=drive_link" target="_blank">↗ Báo cáo bài tập 2</a>
+      </div>
+    </div>
+
+    <!-- BÀI 3 -->
+    <div class="assignment" onclick="toggle(this)">
+      <div class="assignment-header">
+        <div class="assignment-num">3</div>
+        <div class="assignment-meta">
+          <div class="assignment-label">Mục 3.4 · Tổng quan về Trí tuệ Nhân tạo</div>
+          <div class="assignment-title">Viết Prompt hiệu quả cho tác vụ học tập</div>
+          <div class="assignment-sub">Claude · ChatGPT · 9 phiên bản thực nghiệm · ✓ Hoàn thành</div>
+        </div>
+        <div class="assignment-toggle">+</div>
+      </div>
+      <div class="assignment-body">
+        <div class="body-section">
+          <div class="body-label">6 nguyên tắc viết Prompt</div>
+          <ul class="steps-list">
+            <li>Xác định <strong>vai trò (Role)</strong> — "Bạn là giảng viên đại học..."</li>
+            <li>Chỉ định <strong>đối tượng đích</strong> — "...cho sinh viên năm 2 lần đầu tiếp cận"</li>
+            <li>Yêu cầu <strong>cấu trúc đầu ra</strong> — "Trình bày theo bảng / đánh số"</li>
+            <li>Giới hạn <strong>phạm vi rõ ràng</strong> — "Tóm tắt trong 250 từ"</li>
+            <li>Dùng <strong>chain-of-thought</strong> — "Bước 1... Bước 2... Bước 3..."</li>
+            <li>Nêu <strong>ví dụ cụ thể (few-shot)</strong> — "Ví dụ: tan băng Bắc Cực..."</li>
+          </ul>
+        </div>
+        <div class="body-section">
+          <div class="body-label">So sánh Claude vs ChatGPT</div>
+          <div class="compare-grid">
+            <div class="compare-cell">
+              <div class="compare-head">Claude (Anthropic)</div>
+              <ul>
+                <li>Lý luận sâu, logic chặt</li>
+                <li>Hiểu ngữ cảnh Việt Nam tốt</li>
+                <li>Ít hallucinate nhất</li>
+              </ul>
+            </div>
+            <div class="compare-cell">
+              <div class="compare-head">ChatGPT (OpenAI)</div>
+              <ul>
+                <li>Sáng tạo tiêu đề xuất sắc</li>
+                <li>Đa dạng format output</li>
+                <li>Brainstorm nhanh</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag">Role Prompting</span><span class="tag">Chain-of-Thought</span><span class="tag">Few-Shot</span><span class="tag">Thang Bloom</span>
+        </div>
+        <a class="doc-link" href="https://docs.google.com/document/d/1RJAUuKRSNoPrfrNpiublrfMla0O1zPvr/edit?usp=drive_link" target="_blank">↗ Báo cáo bài tập 3</a>
+      </div>
+    </div>
+
+    <!-- BÀI 4 -->
+    <div class="assignment" onclick="toggle(this)">
+      <div class="assignment-header">
+        <div class="assignment-num">4</div>
+        <div class="assignment-meta">
+          <div class="assignment-label">Mục 4.4 · Kỹ năng làm việc nhóm</div>
+          <div class="assignment-title">Hợp tác trực tuyến cho dự án nhóm</div>
+          <div class="assignment-sub">5 thành viên · Canva · Drive · Meet · ✓ Hoàn thành</div>
+        </div>
+        <div class="assignment-toggle">+</div>
+      </div>
+      <div class="assignment-body">
+        <div class="body-section">
+          <div class="body-label">Dự án nhóm</div>
+          <div class="eval-box">Nhóm 5 thành viên thực hiện dự án <strong>"Nghiên cứu Vật liệu mới & Năng lượng xanh"</strong>. Vai trò cá nhân: phụ trách thiết kế, hình ảnh và thuyết trình — thiết kế 18 slides, phối hợp nội dung và thuyết trình trực tiếp.</div>
+        </div>
+        <div class="body-section">
+          <div class="body-label">Bài học rút ra</div>
+          <ul class="steps-list">
+            <li>Canva shared workspace loại bỏ rào cản "chờ bản thiết kế"</li>
+            <li>Google Drive là "xương sống" — cấu trúc thư mục rõ ràng từ đầu tiết kiệm thời gian</li>
+            <li>Luyện tập qua Meet + ghi video là công cụ phản hồi hiệu quả nhất</li>
+          </ul>
+        </div>
+        <div class="tags">
+          <span class="tag">Canva</span><span class="tag">Google Drive</span><span class="tag">Google Meet</span><span class="tag">Zalo</span><span class="tag">18 Slides</span>
+        </div>
+        <a class="doc-link" href="https://docs.google.com/document/d/1VF-8K0nr2CDhauyhUSUnOa8JO7RYZt3C/edit?usp=drive_link" target="_blank">↗ Báo cáo bài tập 4</a>
+      </div>
+    </div>
+
+    <!-- BÀI 5 -->
+    <div class="assignment" onclick="toggle(this)">
+      <div class="assignment-header">
+        <div class="assignment-num">5</div>
+        <div class="assignment-meta">
+          <div class="assignment-label">Mục 5.4 · Nhập môn CNTS & Ứng dụng AI</div>
+          <div class="assignment-title">Sáng tạo nội dung số với AI tạo sinh</div>
+          <div class="assignment-sub">Blog ~1200 từ · 4 công cụ AI · Tiết kiệm 50% · ✓ Hoàn thành</div>
+        </div>
+        <div class="assignment-toggle">+</div>
+      </div>
+      <div class="assignment-body">
+        <div class="body-section">
+          <div class="body-label">Quy trình 4 giai đoạn</div>
+          <ul class="steps-list">
+            <li><strong>Gemini</strong> — Nghiên cứu: 5 ứng dụng AI nổi bật + số liệu UNESCO 2024 · ⏱ 30 phút</li>
+            <li><strong>ChatGPT</strong> — Brainstorm: 10 tiêu đề → kết hợp thành tiêu đề cuối · ⏱ 15 phút</li>
+            <li><strong>Claude</strong> — Viết nội dung chính: 40% giữ, 60% tự viết lại · ⏱ 2 giờ</li>
+            <li><strong>Canva AI</strong> — Thumbnail: 4 phiên bản → chọn 1 + chỉnh thủ công · ⏱ 45 phút</li>
+          </ul>
+        </div>
+        <div class="body-section">
+          <div class="body-label">So sánh thời gian</div>
+          <div class="compare-grid">
+            <div class="compare-cell">
+              <div class="compare-head">Không dùng AI</div>
+              <ul><li>Nghiên cứu: 2–3 giờ</li><li>Viết nháp: 3–4 giờ</li><li>Tổng: 7–10 giờ</li></ul>
+            </div>
+            <div class="compare-cell">
+              <div class="compare-head">Với AI</div>
+              <ul><li>Research + viết: ~3 giờ</li><li>Hoàn thiện: 45 phút</li><li>Tổng: 3–4 giờ ✓</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag">Gemini</span><span class="tag">ChatGPT</span><span class="tag">Claude</span><span class="tag">Canva AI</span>
+        </div>
+        <a class="doc-link" href="https://docs.google.com/document/d/1NzSGCpSeMms2_1YeTUPRR65DtS5GG3pJ/edit?usp=drive_link" target="_blank">↗ Báo cáo bài tập 5</a>
+      </div>
+    </div>
+
+    <!-- BÀI 6 -->
+    <div class="assignment" onclick="toggle(this)">
+      <div class="assignment-header">
+        <div class="assignment-num">6</div>
+        <div class="assignment-meta">
+          <div class="assignment-label">Mục 6.4 · An toàn và liêm chính học thuật</div>
+          <div class="assignment-title">Sử dụng AI có trách nhiệm trong học tập</div>
+          <div class="assignment-sub">Chính sách ĐHQGHN · 6 nguyên tắc · ✓ Hoàn thành</div>
+        </div>
+        <div class="assignment-toggle">+</div>
+      </div>
+      <div class="assignment-body">
+        <div class="body-section">
+          <div class="body-label">Do's & Don'ts theo chính sách ĐHQGHN</div>
+          <div class="compare-grid">
+            <div class="compare-cell">
+              <div class="compare-head">✅ Được phép</div>
+              <ul>
+                <li>Dùng AI tra cứu, lấy ý tưởng ban đầu</li>
+                <li>Kiểm tra ngữ pháp với khai báo rõ</li>
+                <li>Dùng AI gợi ý cú pháp lập trình</li>
+              </ul>
+            </div>
+            <div class="compare-cell">
+              <div class="compare-head">❌ Bị nghiêm cấm</div>
+              <ul>
+                <li>Nộp bài AI tạo ra nguyên vẹn</li>
+                <li>Dùng AI trong thi cử không phép</li>
+                <li>Ẩn giấu việc đã dùng AI</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag">Đạo đức AI</span><span class="tag">ĐHQGHN Policy 2024</span><span class="tag">Liêm chính học thuật</span>
+        </div>
+        <a class="doc-link" href="https://docs.google.com/document/d/1jzd5Ns3EL2RsITOTN-wzFLZ-tZGihe8C/edit?usp=sharing" target="_blank">↗ Báo cáo bài tập 6</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section fade-in">
+  <div class="quote-inner">
+    <blockquote>"AI không thay thế tư duy — AI khuếch đại tư duy."</blockquote>
+    <div class="quote-attr">Nguyễn Đức Ngọc Anh · Cảm nhận sau 6 bài tập</div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<section class="section fade-in" id="summary">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Tổng kết & Đánh giá bản thân</h2>
+  </div>
+
+  <div class="summary-grid">
+    <div class="stat-cell"><div class="stat-num">6</div><div class="stat-label">Bài tập hoàn thành</div></div>
+    <div class="stat-cell"><div class="stat-num">4</div><div class="stat-label">Công cụ AI đã dùng</div></div>
+    <div class="stat-cell"><div class="stat-num">6</div><div class="stat-label">Nguyên tắc cá nhân</div></div>
+  </div>
+
+  <div class="section-header" style="margin-top:3rem;">
+    <span class="section-num">—</span>
+    <h3 class="section-title" style="font-size:1.4rem;">Kỹ năng đã tích lũy</h3>
+  </div>
+  <div class="skills-wrap">
+    <span class="skill-badge">Quản lý tệp & thư mục</span>
+    <span class="skill-badge">Tìm kiếm học thuật</span>
+    <span class="skill-badge">Prompt Engineering</span>
+    <span class="skill-badge">Role Prompting</span>
+    <span class="skill-badge">Chain-of-Thought</span>
+    <span class="skill-badge">Hợp tác nhóm trực tuyến</span>
+    <span class="skill-badge">Canva Shared Workspace</span>
+    <span class="skill-badge">Google Drive & Docs</span>
+    <span class="skill-badge">Sáng tạo nội dung AI</span>
+    <span class="skill-badge">Đạo đức sử dụng AI</span>
+    <span class="skill-badge">Đánh giá nguồn tin</span>
+    <span class="skill-badge">Tư duy phản biện</span>
+  </div>
+
+  <div class="section-header" style="margin-top:3rem;">
+    <span class="section-num">—</span>
+    <h3 class="section-title" style="font-size:1.4rem;">6 Nguyên tắc AI cá nhân</h3>
+  </div>
+  <div class="principles-grid">
+    <div class="principle-card"><div class="principle-num">01</div><div><div class="principle-title">Tư duy trước, AI sau</div><div class="principle-desc">Hình thành quan điểm riêng trước khi hỏi AI. AI là bước kiểm chứng và mở rộng.</div></div></div>
+    <div class="principle-card"><div class="principle-num">02</div><div><div class="principle-title">Minh bạch tuyệt đối</div><div class="principle-desc">Khai báo rõ mọi trường hợp sử dụng AI — dùng để làm gì, ở bước nào.</div></div></div>
+    <div class="principle-card"><div class="principle-num">03</div><div><div class="principle-title">Kiểm chứng độc lập</div><div class="principle-desc">Mọi số liệu từ AI phải qua Google Scholar, ILO, WEF hoặc nguồn học thuật uy tín.</div></div></div>
+    <div class="principle-card"><div class="principle-num">04</div><div><div class="principle-title">Giữ tiếng nói cá nhân</div><div class="principle-desc">Bài viết cuối phải phản ánh quan điểm và giọng văn của bản thân.</div></div></div>
+    <div class="principle-card"><div class="principle-num">05</div><div><div class="principle-title">Học từ AI, không dựa vào AI</div><div class="principle-desc">Dùng AI như cơ hội hiểu sâu hơn. Mục tiêu là tăng năng lực bản thân.</div></div></div>
+    <div class="principle-card"><div class="principle-num">06</div><div><div class="principle-title">Tôn trọng ranh giới bối cảnh</div><div class="principle-desc">Mỗi môn học có quy định riêng về AI. Tuân thủ và chủ động hỏi khi không chắc.</div></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025–2026 · Nguyễn Đức Ngọc Anh · MSSV 25020456</span>
+  <span>Nhập môn Công nghệ Số & ƯDTTNT</span>
+</footer>
+
+<script>
+  function toggle(el) {
+    el.classList.toggle('open');
+  }
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
